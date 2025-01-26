@@ -37,11 +37,12 @@ Frontend: React.js,Flutter
 Backend: Node.js,django
 Database: Supabase
 
-##Future Enhancements:
+## Future Enhancements:
 
 Integration of machine learning for personalized recommendations.
 Advanced analytics for community and event performance.
 
-##Contribution:
+## Contribution:
+
 We welcome contributions to improve and expand the functionality of this system! Feel free to fork the repository, open issues, or submit pull requests.
 
