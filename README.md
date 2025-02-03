@@ -11,8 +11,9 @@ Faculty in Charge: Oversee approvals and event proposals.
 
 ## Community Dashboard:
 
- Overview of events, teammates, feedback, and membership forums.
+Overview of events, teammates, feedback, and membership forums.
 Carousel view for community photos and event highlights.
+
 ## Event Management:
 
 Create, edit, and manage events.
@@ -34,8 +35,8 @@ Display relevant opportunities with required skills and registration links.
 ## Tech Stack:
 
 Frontend: React.js,Flutter
-Backend: Node.js,django
-Database: Supabase
+Backend: Django
+Database: SQL
 
 ## Future Enhancements:
 
