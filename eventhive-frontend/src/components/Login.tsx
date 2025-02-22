@@ -1,7 +1,12 @@
+// src/components/Login.tsx
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login: React.FC = () => {
+interface LoginProps {
+  onLogin: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,7 +15,15 @@ const Login: React.FC = () => {
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
     // Here, you would usually send this data to a backend for authentication
-    navigate('/home');
+    // Simulate a successful login: (Replace with your actual authentication logic)
+    if (password === '123') {  // Replace this dummy condition
+      onLogin();
+      navigate('/home');
+    } else {
+      // Handle login error (e.g., display an error message)
+      alert('Invalid credentials');
+    }
+
   };
 
    const handleEmailClick = () =>{
