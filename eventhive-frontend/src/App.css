@@ -1,42 +1,133 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* App.css */
+
+/* General Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #F9FAFB; /* Light gray table background */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Nunito Sans', sans-serif; /* Apply Nunito Sans */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+    font-family: 'Nunito Sans', sans-serif; /* Apply Nunito Sans */
+    color: #202224; /* Dark gray text color */
+    border-right: 1px solid #E5E7EB; /* Add vertical lines */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+th {
+    background-color: #FFFFFF; /* White header background */
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Remove the right border from the last column*/
+th:last-child,
+td:last-child {
+    border-right: none;
 }
 
-.card {
-  padding: 2em;
+tbody tr:hover {
+    background-color: #F3F4F6;
 }
 
-.read-the-docs {
-  color: #888;
+/* General Button Styles (Base) */
+button {
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.85rem;
+}
+
+/* Specific Button Styles (Approve, Reject, Delete) */
+.approve-button {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green */
+}
+
+.approve-button:hover {
+    background-color: #c1e2b3; /* Slightly darker green */
+}
+
+.reject-button {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red */
+}
+
+.reject-button:hover {
+    background-color: #e2b3b8; /* Slightly darker red */
+}
+
+.delete-button {
+    position: relative;          /* Position relative */
+    background-color: #f8d7da !important;   /* Light red background */
+    color: #721c24 !important;            /* Dark red color */
+    border-radius: 50% !important;           /* Make it a circle */
+    width: 30px !important;                /* Set width */
+    height: 30px !important;               /* Set height */
+    display: flex !important;                /* Use flexbox */
+    align-items: center !important;         /* Vertically center content */
+    justify-content: center !important;      /* Horizontally center content */
+    padding: 0  !important;                  /* Remove padding */
+    border: none  !important;                /* Remove border */
+    cursor: pointer  !important;             /* Set cursor */
+    margin: auto  !important;              /* Add distance */
+}
+
+.delete-button img {
+    width: 18px;                 /* Adjust width */
+    height: 18px;                /* Adjust height */
+}
+
+.delete-button:hover {
+    color: #DC2626;
+}
+
+/* Search Input Styles */
+.search-input {
+    padding: 8px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    width: 200px;
+    box-sizing: border-box;
+    float: right;
+    font-family: 'Nunito Sans', sans-serif; /* Apply Nunito Sans */
+}
+
+.action-cell {
+    text-align: center !important; /* Center the content horizontally */
+    vertical-align: middle !important; /* Center content vertically */
+}
+
+.action-cell .delete-button {
+    position: relative !important;          /* Position relative */
+    background-color: #f8d7da !important;   /* Light red background */
+    color: #721c24 !important;            /* Dark red color */
+    border-radius: 50% !important;           /* Make it a circle */
+    width: 30px !important;                /* Set width */
+    height: 30px !important;               /* Set height */
+    display: flex !important;                /* Use flexbox */
+    align-items: center !important;         /* Vertically center content */
+    justify-content: center !important;      /* Horizontally center content */
+    padding: 0  !important;                  /* Remove padding */
+    border: none  !important;                /* Remove border */
+    cursor: pointer  !important;             /* Set cursor */
+    margin: auto  !important;
+}
+
+.action-cell .delete-button img {
+    width: 18px !important;                 /* Adjust width */
+    height: 18px !important;                /* Adjust height */
+    margin: 0 auto;
 }
