@@ -654,3 +654,90 @@ h2 {
   border-color: #aaa;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+.feedback-container {
+  font-family: 'Nunito Sans', sans-serif;
+  background: #F5F6FA; /* Main Bg Color */
+  position: relative; /* Allows absolute positioning of children */
+  width: 100%; /* Changed from 1440px to 100% for responsiveness */
+  min-height: 1070px;
+}
+
+.feedback-header {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 44px;
+  letter-spacing: -0.114286px;
+  color: #202224;
+  padding: 20px;
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.feedback-table th,
+.feedback-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 0.6px solid #E0E0E0; /* Divider color */
+}
+
+.feedback-table th {
+  background: #FFFFFF;  /*Background color of the thead*/
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #202224;
+}
+
+.feedback-table td {
+  font-size: 14px;
+  line-height: 19px;
+  color: #202224;
+}
+
+.feedback-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000; /* Default text color */
+}
+
+.mark-as-read-button {
+  background: #DBF4D9; /* Lighter green */
+  color: #00CB22;  /* Stronger green */
+}
+
+.delete-button {
+  background: #F8D7CA; /* Lighter red */
+  color: #EF3826; /* Stronger red */
+}
+
+/* Specific element styling */
+table th:nth-child(1) {
+  width: 150px; /* Date column width */
+}
+table th:nth-child(2) {
+  width: 600px; /* Feedback column width */
+}
+
+.delete-button {
+  background-color: #F8D7CA; /* Lighter red background */
+  color: #EF3826; /* Strong red color */
+  border: none;
+  padding: 8px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none; /*Remove the text transform */
+}
+
+.delete-button:hover {
+    background-color: #E0B4A6; /* Darker red on hover */
+}
