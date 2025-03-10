@@ -1,8 +1,9 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useState, FC } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Event, CreateEventForm } from '../types/event'; // Import both interfaces
 
-// Styled Components
+// Styled Components (no changes here)
 const PageContainer = styled.div`
   display: flex;
   width: 100%;
@@ -142,7 +143,7 @@ const FileInput = styled.input`
     opacity: 0;           /* Make it fully transparent */
     width: 100%;         /* Take full width of parent */
     height: 100%;        /* Take full height of parent */
-    position: absolute;   /* Position it on top of PosterDropArea */
+    position: absolute;   /* Needed for absolute positioning of FileInput */
     top: 0;
     left: 0;
     cursor: pointer;       /* Change cursor to indicate it's clickable */
@@ -195,38 +196,23 @@ const ImagePreview = styled.img`
     margin-bottom: 10px;
 `;
 
-// Types
-export interface Event { // Exported for use in HomePage
-    id: number;
-    image: string;
-    name: string;
-    startDate: string;
-    time: string;
-    type: string;
-    description?: string;
-    endDate?: string;
-    registrationLink?: string;
-    poster?: File | null;
-}
-
 interface CreateEventPageProps { // To receive the addEvent function
-    addEvent: (event: Event) => void;
+  addEvent?: (event: Event) => void;
 }
 
 // Component
-const CreateEventPage: FC<CreateEventPageProps> = ({ addEvent }) => {
+const CreateEventPage: FC<CreateEventPageProps> = () => {
     const navigate = useNavigate();
-    const [eventData, setEventData] = useState<Event>({
-        id: 0,
-        image: "",
+    const [eventData, setEventData] = useState<CreateEventForm>({ // Use CreateEventForm
         name: "",
         startDate: "",
         time: "",
-        type: "",
+        type: "Offline", // Set default type
         description: "",
         endDate: "",
         registrationLink: "",
         poster: null,
+        image: ""
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -234,11 +220,11 @@ const CreateEventPage: FC<CreateEventPageProps> = ({ addEvent }) => {
     };
 
     const handleEventTypeClick = (type: string) => {
-        setEventData({ ...eventData, type: type });
+        setEventData({ ...eventData, type: type as 'Online' | 'Offline' }); // Explicitly cast to the union type
     };
 
-    const handleModeChange = (mode: string) => {
-        setEventData({ ...eventData, mode: mode });
+    const handleModeChange = (mode: "Online" | "Offline") => {
+        setEventData({ ...eventData, type: mode }); // Set the type to the selected mode
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -249,7 +235,7 @@ const CreateEventPage: FC<CreateEventPageProps> = ({ addEvent }) => {
         }
     };
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const newEventId = Date.now();
         // Convert the image file to a Base64 string
@@ -257,32 +243,36 @@ const CreateEventPage: FC<CreateEventPageProps> = ({ addEvent }) => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64String = reader.result as string;
-                const newEvent = { ...eventData, id: newEventId, image: base64String };
+                const newEvent: Event = { // Create an Event object
+                    id: newEventId,
+                    image: base64String,
+                    name: eventData.name,
+                    startDate: eventData.startDate,
+                    time: eventData.time,
+                    type: eventData.type
+                };
                 localStorage.setItem('newEvent', JSON.stringify(newEvent));
-                addEvent(newEvent); // Add the new event to the HomePage's state
-                navigate("/");
+                navigate("/home");
             };
             reader.readAsDataURL(eventData.poster);
         } else {
-            const newEvent = { ...eventData, id: newEventId };
+            const newEvent: Event = { // Create an Event object
+                id: newEventId,
+                image: "",
+                name: eventData.name,
+                startDate: eventData.startDate,
+                time: eventData.time,
+                type: eventData.type
+            };
             localStorage.setItem('newEvent', JSON.stringify(newEvent));
-            addEvent(newEvent); // Add the new event to the HomePage's state
-            navigate("/");
+            navigate("/home");
         }
 
     };
 
   const eventTypeOptions = [
-    "Workshop",
-    "Hackathon",
-    "Talk Session",
-    "Exhibition",
-    "Quiz",
-    "Bootcamp",
-    "Contest",
-    "Meetup",
-    "Challenge",
-    "Others",
+    "Online",
+    "Offline"
   ];
 
   return (
@@ -357,21 +347,21 @@ const CreateEventPage: FC<CreateEventPageProps> = ({ addEvent }) => {
               <FormLabel>Mode of Event (Choose one):</FormLabel>
               <ModeOfEventOptions>
                 <ModeOfEventButton
-                  className={`offline ${eventData.mode === "Offline" ? "active" : ""}`}
+                  className={`offline ${eventData.type === "Offline" ? "active" : ""}`}
                   onClick={() => handleModeChange("Offline")}
                   type="button"
                 >
                   Offline
                 </ModeOfEventButton>
                 <ModeOfEventButton
-                  className={`online ${eventData.mode === "Online" ? "active" : ""}`}
+                  className={`online ${eventData.type === "Online" ? "active" : ""}`}
                   onClick={() => handleModeChange("Online")}
                   type="button"
                 >
                   Online
                 </ModeOfEventButton>
               </ModeOfEventOptions>
-            </FormGroup>
+</FormGroup>
 
             <FormGroup>
               <FormLabel>Registration Link:</FormLabel>
