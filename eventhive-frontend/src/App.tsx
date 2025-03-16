@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard';
 import CreateEventPage from './pages/CreateEventPage';
 import Feedback from './pages/Feedback'; // Import event
 import HomePage from './pages/HomePage';
+import CommunityPage from './pages/CommunityPage';
 
 import "./assets/styles/style.css";
 
@@ -29,7 +30,7 @@ function App() {
 
                 {/* Protected routes - only accessible if logged in */}
                 <Route
-                    path="/community"
+                    path="/community-members"
                     element={
                         isLoggedIn ? (
                             <Dashboard><CommunityMembersPage /></Dashboard>
@@ -59,11 +60,21 @@ function App() {
                         )
                     }
                 />
-                   <Route
+                <Route
                     path="/feedback"
                     element={
                         isLoggedIn ? (
                             <Dashboard><Feedback /></Dashboard>
+                        ) : (
+                            <Navigate to="/login" />
+                        )
+                    }
+                />
+                <Route
+                    path="/community"
+                    element={
+                        isLoggedIn ? (
+                            <Dashboard><CommunityPage /></Dashboard>
                         ) : (
                             <Navigate to="/login" />
                         )

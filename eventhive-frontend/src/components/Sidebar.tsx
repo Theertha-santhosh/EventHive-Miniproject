@@ -27,7 +27,7 @@
                      </li>
                      <li>
                          <NavLink
-                             to="/community"
+                             to="/community-members"
                              className={({ isActive }) => isActive ? 'active-link' : ''} // Added active-link class
                          >
                              <UsersIcon className="sidebar-icon" />

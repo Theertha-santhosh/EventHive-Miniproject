@@ -38,7 +38,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, approveRequest, rejectR
             {deleteMember && (
                 <div className="member-actions">
                     <button className="delete-button" onClick={() => deleteMember(member.id)}>
-                        <img width={22} height={22} src="/images/binnew.png" alt="Delete" />
+                        <img width={38} height={38} src="/images/binnew.png" alt="Delete" />
                     </button>
                 </div>
             )}

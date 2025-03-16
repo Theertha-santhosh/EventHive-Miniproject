@@ -21,7 +21,7 @@ const TableRow:FC<TableRowProps> = ({event, deleteEvent}) => {
            <td><span className={event.type === "Online" ? 'online' : 'offline'}>{event.type}</span></td>
           <td>
                <Button color="delete" onClick={handleDeleteEvent}>
-                 <img width={18} src="/images/binnew.png" alt="delete-button"/>
+                 <img width={38} src="/images/binnew.png" alt="delete-button"/>
                  </Button>
            </td>
        </tr>

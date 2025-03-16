@@ -176,7 +176,7 @@ body {
 }
 
 .button.delete {
-  background-color: #ffe8e6;
+  background-color: #ffffff;
   color: #dc3545;
 }
 
@@ -312,7 +312,7 @@ button {
 
   .delete-button {
       position: relative;          /* Position relative */
-      background-color: #f8d7da;   /* Light red background */
+      /*background-color: #f8d7da;    Light red background */
       color: #721c24;            /* Dark red color */
       border-radius: 50%;           /* Make it a circle */
       width: 30px;                /* Set width */
@@ -535,7 +535,7 @@ h2 {
 
 .delete-button {
   margin-left: auto;
-  background-color: #fefefe;
+  /* background-color: #fefefe; */
   border: none;
   cursor: pointer;
 }
@@ -714,7 +714,7 @@ h2 {
 }
 
 .delete-button {
-  background: #F8D7CA; /* Lighter red */
+  /*background: #F8D7CA; /* Lighter red */
   color: #EF3826; /* Stronger red */
 }
 
@@ -727,7 +727,7 @@ table th:nth-child(2) {
 }
 
 .delete-button {
-  background-color: #F8D7CA; /* Lighter red background */
+  /*background-color: #F8D7CA;  Lighter red background */
   color: #EF3826; /* Strong red color */
   border: none;
   padding: 8px 25px;
@@ -739,5 +739,5 @@ table th:nth-child(2) {
 }
 
 .delete-button:hover {
-    background-color: #E0B4A6; /* Darker red on hover */
+    background-color: #ffffff; /* Darker red on hover */
 }

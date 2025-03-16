@@ -29,7 +29,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, deleteEvent }) => {
                 </span>
             </div>
             <button className="delete-button" onClick={() => deleteEvent(event.id)}>
-                <img width={22} height={22} src="/images/binnew.png" alt="Delete" />
+                <img width={38} height={38} src="/images/binnew.png" alt="Delete" />
             </button>
         </div>
     );
