@@ -13,6 +13,7 @@ export interface Event {
     name: string;
     startDate: string;
     time: string;
+    categories:'Workshop' | 'Hackathon' | 'Talk Session' | 'Exhibition' | 'Quiz' | 'Bootcamp' | 'Contest' | 'Meetup' | 'Challenge' | 'Others';
     type: 'Online' | 'Offline'; // This dictates the type of event
     description?: string;   // Optional description
     endDate?: string;       // Optional end date

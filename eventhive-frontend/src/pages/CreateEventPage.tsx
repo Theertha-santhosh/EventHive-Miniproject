@@ -207,24 +207,29 @@ const CreateEventPage: FC<CreateEventPageProps> = () => {
         name: "",
         startDate: "",
         time: "",
-        type: "Offline", // Set default type
+        categories: "Workshop",
+        type: "Offline",
         description: "",
         endDate: "",
         registrationLink: "",
         poster: null,
-        image: ""
+        image: "",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setEventData({ ...eventData, [e.target.name]: e.target.value });
     };
 
-    const handleEventTypeClick = (type: string) => {
-        setEventData({ ...eventData, type: type as 'Online' | 'Offline' }); // Explicitly cast to the union type
+    const handleCategoryClick = (category: 'Workshop' | 'Hackathon' | 'Talk Session' | 'Exhibition' | 'Quiz' | 'Bootcamp' | 'Contest' | 'Meetup' | 'Challenge' | 'Others') => {
+        setEventData({ ...eventData, categories: category });
     };
 
-    const handleModeChange = (mode: "Online" | "Offline") => {
-        setEventData({ ...eventData, type: mode }); // Set the type to the selected mode
+    const handleTypeChange = (type: 'Online' | 'Offline') => {
+        setEventData({ ...eventData, type: type });
+    };
+
+    const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEventData({ ...eventData, time: e.target.value });
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -235,44 +240,60 @@ const CreateEventPage: FC<CreateEventPageProps> = () => {
         }
     };
 
+    const formatTime = (time24: string): string => {
+        const [hours, minutes] = time24.split(':');
+        let hoursInt = parseInt(hours, 10);
+        const ampm = hoursInt >= 12 ? 'PM' : 'AM';
+        hoursInt = hoursInt % 12;
+        hoursInt = hoursInt ? hoursInt : 12; // the hour '0' should be '12'
+        return `${hoursInt}:${minutes} ${ampm}`;
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const newEventId = Date.now();
-        // Convert the image file to a Base64 string
+
         if (eventData.poster) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64String = reader.result as string;
-                const newEvent: Event = { // Create an Event object
+                const newEvent: Event = {
                     id: newEventId,
                     image: base64String,
                     name: eventData.name,
                     startDate: eventData.startDate,
-                    time: eventData.time,
-                    type: eventData.type
+                    time: formatTime(eventData.time), // Format the time here
+                    type: eventData.type,
                 };
                 localStorage.setItem('newEvent', JSON.stringify(newEvent));
                 navigate("/home");
             };
             reader.readAsDataURL(eventData.poster);
         } else {
-            const newEvent: Event = { // Create an Event object
+            const newEvent: Event = {
                 id: newEventId,
                 image: "",
                 name: eventData.name,
                 startDate: eventData.startDate,
-                time: eventData.time,
-                type: eventData.type
+                time: formatTime(eventData.time), // Format the time here
+                type: eventData.type,
             };
             localStorage.setItem('newEvent', JSON.stringify(newEvent));
             navigate("/home");
         }
-
     };
 
-  const eventTypeOptions = [
-    "Online",
-    "Offline"
+  const categoryOptions = [
+    "Workshop",
+    "Hackathon",
+    "Talk Session",
+    "Exhibition",
+    "Quiz",
+    "Bootcamp",
+    "Contest",
+    "Meetup",
+    "Challenge",
+    "Others"
   ];
 
   return (
@@ -292,21 +313,50 @@ const CreateEventPage: FC<CreateEventPageProps> = () => {
                 required
               />
             </FormGroup>
-
-            <FormGroup>
-              <FormLabel>Event Type:</FormLabel>
+             <FormGroup>
+              <FormLabel>Event Category:</FormLabel>
               <EventTypeOptions>
-                {eventTypeOptions.map((type) => (
+                {categoryOptions.map((category) => (
                   <EventTypeButton
-                    key={type}
-                    className={eventData.type === type ? "active" : ""}
-                    onClick={() => handleEventTypeClick(type)}
+                    key={category}
+                    className={eventData.categories === category ? "active" : ""}
+                    onClick={() => handleCategoryClick(category as 'Workshop' | 'Hackathon' | 'Talk Session' | 'Exhibition' | 'Quiz' | 'Bootcamp' | 'Contest' | 'Meetup' | 'Challenge' | 'Others')}
                     type="button"
                   >
-                    {type}
+                    {category}
                   </EventTypeButton>
                 ))}
               </EventTypeOptions>
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Event Type:</FormLabel>
+              <ModeOfEventOptions>
+                <ModeOfEventButton
+                  className={`offline ${eventData.type === "Offline" ? "active" : ""}`}
+                  onClick={() => handleTypeChange("Offline")}
+                  type="button"
+                >
+                  Offline
+                </ModeOfEventButton>
+                <ModeOfEventButton
+                  className={`online ${eventData.type === "Online" ? "active" : ""}`}
+                  onClick={() => handleTypeChange("Online")}
+                  type="button"
+                >
+                  Online
+                </ModeOfEventButton>
+              </ModeOfEventOptions>
+            </FormGroup>
+
+             <FormGroup>
+                <FormLabel>Time:</FormLabel>
+                <FormInput
+                    type="time"
+                    name="time"
+                    value={eventData.time}
+                    onChange={handleTimeChange}
+                    required
+                />
             </FormGroup>
 
             <DateInputContainer>
@@ -343,25 +393,7 @@ const CreateEventPage: FC<CreateEventPageProps> = () => {
               />
             </FormGroup>
 
-            <FormGroup>
-              <FormLabel>Mode of Event (Choose one):</FormLabel>
-              <ModeOfEventOptions>
-                <ModeOfEventButton
-                  className={`offline ${eventData.type === "Offline" ? "active" : ""}`}
-                  onClick={() => handleModeChange("Offline")}
-                  type="button"
-                >
-                  Offline
-                </ModeOfEventButton>
-                <ModeOfEventButton
-                  className={`online ${eventData.type === "Online" ? "active" : ""}`}
-                  onClick={() => handleModeChange("Online")}
-                  type="button"
-                >
-                  Online
-                </ModeOfEventButton>
-              </ModeOfEventOptions>
-</FormGroup>
+
 
             <FormGroup>
               <FormLabel>Registration Link:</FormLabel>
