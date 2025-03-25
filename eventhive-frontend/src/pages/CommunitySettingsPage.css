@@ -1,0 +1,75 @@
+/* src/pages/CommunitySettingsPage.css */
+
+.community-settings-container {
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+.community-settings-title {
+    
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.community-list {
+    list-style: none;
+    padding: 0;
+}
+
+.community-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; 
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(255, 254, 254, 0.1); /* Subtle shadow */ /* Ensures description doesn't overflow */
+}
+
+.community-name-button {
+    align-self: start;
+    display: flex;
+    justify-content: space-between; /* Align name and arrow */
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+  
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.community-name-button:hover {
+    background-color: #A67BFB;
+}
+
+.community-name-button.active {
+    background-color: #A67BFB; /* Same as hover color */
+  }
+
+.dropdown-arrow {
+    font-size: 16px; /* Slightly larger arrow */
+    color: #777;  
+}
+
+.dropdown-arrow :hover {
+    font-size: 16px; /* Slightly larger arrow */
+    color: #9f7ee1;  
+}
+
+.community-description {
+    padding: 15px;
+    background-color: #f4eeff;
+    font-size: 20px;
+    color: #000000;
+    border-top: 1px solid #ddd;
+}
+.back-to-settings { /* Added a class for back to setting*/
+    text-transform: uppercase; /* Convert text to uppercase */
+    font-weight: bold;   /* Make the text bold */
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
