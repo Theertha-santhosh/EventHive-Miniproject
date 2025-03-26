@@ -66,7 +66,7 @@ const CommunitySettingsPage: React.FC = () => {
     
 
     const handleBackClick = () => {
-        navigate('/settings'); // Navigate back to SettingsPage
+        navigate('/setting'); // Navigate back to SettingsPage
     };
 
     return (
