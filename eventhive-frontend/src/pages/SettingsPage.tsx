@@ -1,4 +1,3 @@
-// src/pages/SettingsPage.tsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './SettingsPage.css';

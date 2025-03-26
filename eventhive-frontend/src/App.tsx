@@ -44,7 +44,7 @@ function App() {
                 />
                 
                 <Route
-                    path="/settings"
+                    path="/setting"
                     element={
                         isLoggedIn ? (
                             <Dashboard><SettingsPage /></Dashboard>
