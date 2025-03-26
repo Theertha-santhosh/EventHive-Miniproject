@@ -1,9 +1,8 @@
 // src/pages/CommunityMembersPage.tsx
 import React, { useState, useEffect } from 'react';
-//import ButtonTable from '../components/ButtonTable'; // No need to import now
 
 interface CommunityMember {
-    id: string; // Unique ID for each member
+    id: string;
     photo: string;
     name: string;
     course: string;
@@ -17,12 +16,11 @@ const CommunityMembersPage = () => {
     const [pendingRequests, setPendingRequests] = useState<CommunityMember[]>([]);
     const [membersList, setMembersList] = useState<CommunityMember[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [memberCount, setMemberCount] = useState(4); // Initialize member count
 
     // Mock API Fetch Functions (Replace with your actual API calls)
     const fetchPendingRequests = async () => {
-        // Simulate API delay
         await new Promise((resolve) => setTimeout(resolve, 500));
-        // Replace with your actual API endpoint
         const data: CommunityMember[] = [
             { id: '1', photo: '/images/stu1.png', name: 'Arya A', course: 'BTech', streamOfStudy: 'Computer Science and Engineering', requestedOn: '12-2-25' },
             { id: '2', photo: '/images/stu2.png', name: 'Riyas K', course: 'BTech', streamOfStudy: 'Civil Engineering', requestedOn: '10-2-25' },
@@ -32,9 +30,7 @@ const CommunityMembersPage = () => {
     };
 
     const fetchMembersList = async () => {
-        // Simulate API delay
         await new Promise((resolve) => setTimeout(resolve, 500));
-        // Replace with your actual API endpoint
         const data: CommunityMember[] = [
             { id: '4', photo: '/images/stu4.png', name: 'Arya A', course: 'BTech', streamOfStudy: 'Computer Science and Engineering', joinedOn: '15-2-25', role: 'Member' },
             { id: '5', photo: '/images/stu5.png', name: 'Riyas K', course: 'BTech', streamOfStudy: 'Electronics and Communication Engineering', joinedOn: '10-2-25', role: 'Member' },
@@ -45,34 +41,31 @@ const CommunityMembersPage = () => {
     };
 
     const approveRequest = async (memberId: string) => {
-        // Replace with your API call to approve a request
         console.log(`Approving request for member ID: ${memberId}`);
         const approvedMember = pendingRequests.find(member => member.id === memberId);
         if (approvedMember) {
-            // Add the approved member to the membersList with "Member" role
             setMembersList([
                 ...membersList,
                 {
                     ...approvedMember,
-                    joinedOn: new Date().toLocaleDateString(), // Set joined date
-                    role: 'Member', // Set default role
+                    joinedOn: new Date().toLocaleDateString(),
+                    role: 'Member',
                 },
             ]);
-            // Remove the member from pendingRequests
             setPendingRequests(pendingRequests.filter(member => member.id !== memberId));
+            setMemberCount(prevCount => prevCount + 1); // Increment member count
         }
     };
 
     const rejectRequest = async (memberId: string) => {
-        // Replace with your API call to reject a request
         console.log(`Rejecting request for member ID: ${memberId}`);
-        setPendingRequests(pendingRequests.filter(member => member.id !== memberId)); // Remove from pending list
+        setPendingRequests(pendingRequests.filter(member => member.id !== memberId));
     };
 
     const deleteMember = async (memberId: string) => {
-        // Replace with your API call to delete a member
         console.log(`Deleting member with ID: ${memberId}`);
-        setMembersList(membersList.filter(member => member.id !== memberId));  // Remove from member list
+        setMembersList(membersList.filter(member => member.id !== memberId));
+        setMemberCount(prevCount => prevCount - 1); // Decrement member count
     };
 
     useEffect(() => {
@@ -80,15 +73,22 @@ const CommunityMembersPage = () => {
         fetchMembersList();
     }, []);
 
+    useEffect(() => {
+        // Update memberCount based on the initial membersList length after it's fetched
+        setMemberCount(membersList.length);
+    }, [membersList]); // Run only when membersList changes
+
+
     const filteredMembers = membersList.filter(member =>
         member.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Community Members <span style={{ color: 'grey' }}>253</span></h1>
+            <h1>Community Members <span style={{ color: 'grey' }}>{memberCount}</span></h1>
 
             <h2>Pending Request</h2>
+            {/* ... (Rest of the component remains the same) */}
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                     <tr>
