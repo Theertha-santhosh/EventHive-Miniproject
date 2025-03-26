@@ -37,7 +37,7 @@ function App() {
                     element={
                         isLoggedIn ? (
                             <Dashboard><CommunityMembersPage /></Dashboard>
-                        ) : (
+                        ) : ( 
                             <Navigate to="/login" />
                         )
                     }
