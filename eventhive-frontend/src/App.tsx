@@ -10,9 +10,11 @@ import Login from './components/Login';
 import CommunityMembersPage from './pages/Membership';
 import Dashboard from './components/Dashboard';
 import CreateEventPage from './pages/CreateEventPage';
-import Feedback from './pages/Feedback'; // Import event
+import Feedback from './pages/Feedback';
 import HomePage from './pages/HomePage';
 import CommunityPage from './pages/CommunityPage';
+import SettingsPage from './pages/SettingsPage';
+import CommunitySettingsPage from './pages/CommunitySettingsPage'; // Import CommunitySettingsPage
 
 import "./assets/styles/style.css";
 
@@ -29,6 +31,7 @@ function App() {
                 <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
                 {/* Protected routes - only accessible if logged in */}
+
                 <Route
                     path="/community-members"
                     element={
@@ -39,6 +42,31 @@ function App() {
                         )
                     }
                 />
+                
+                <Route
+                    path="/settings"
+                    element={
+                        isLoggedIn ? (
+                            <Dashboard><SettingsPage /></Dashboard>
+                        ) : (
+                            <Navigate to="/login" />
+                        )
+                    }
+                />
+
+                {/* Add CommunitySettingsPage as a separate route */}
+                <Route
+                    path="/community-settings"
+                    element={
+                        isLoggedIn ? (
+                            <Dashboard><CommunitySettingsPage /></Dashboard>
+                        ) : (
+                            <Navigate to="/login" />
+                        )
+                    }
+                />
+
+                {/* Other routes */}
                 <Route
                     path="/home"
                     element={
@@ -49,7 +77,7 @@ function App() {
                         )
                     }
                 />
-
+                {/* Add other routes here */}
                 <Route
                     path="/create-event"
                     element={
@@ -80,6 +108,7 @@ function App() {
                         )
                     }
                 />
+
 
                 {/* Redirect to login if not authenticated */}
                 <Route path="/" element={<Navigate to="/login" />} />

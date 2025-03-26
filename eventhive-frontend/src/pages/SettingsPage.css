@@ -1,0 +1,184 @@
+/* src/pages/SettingsPage.css */
+
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-button, .more-options-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-text {
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 20px;
+    color: #888;
+    font-size: 12px;
+}
+
+
+.feedback-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+}
+
+/* Styles for Terms and Privacy Containers */
+.terms-conditions-container,
+.privacy-policy-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #b97ee1;
+}
+
+.terms-title,
+.privacy-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.terms-section,
+.privacy-section {
+    margin-bottom: 20px;
+}
+
+.terms-subtitle,
+.privacy-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.terms-subsubsection,
+.privacy-subsubsection {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #777;
+}
+
+.terms-text,
+.privacy-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+}
+/* SettingsPage.css */
+
+.menu-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #211a36;
+    cursor: pointer;
+  }
+  
+  .feedback-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .feedback-link svg {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    fill: #555;
+  }
+  
+  .terms-content,
+  .privacy-content {
+    padding: 20px; /* Increased padding for better spacing */
+    background-color: #f4eeff;
+    border: 1px solid #ddd;
+    margin-top: 10px; /* Increased margin for better spacing */
+    font-family: 'Arial', sans-serif; /* Added a common, readable font */
+    line-height: 1.6; /* Added line height for better readability */
+    color: #444; /* Darker color for better contrast */
+  }
+  
+  .terms-content h3,
+  .privacy-content h3 {
+    font-size: 24px; /* Larger font size for headings */
+    margin-bottom: 15px; /* Increased spacing below headings */
+    color: #333; /* Darker color for headings */
+  }
+  
+  .terms-content h4,
+  .privacy-content h4 {
+    font-size: 18px; /* Slightly larger font size for subheadings */
+    margin-top: 20px; /* Increased spacing above subheadings */
+    margin-bottom: 10px; /* Increased spacing below subheadings */
+    color: #333; /* Darker color for subheadings */
+  }
+  
+  .terms-content h5,
+  .privacy-content h5 {
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  .terms-content ul,
+  .privacy-content ul {
+    padding-left: 25px; /* Indentation for lists */
+    margin-bottom: 15px; /* Spacing below lists */
+  }
+  
+  .terms-content li,
+  .privacy-content li {
+    margin-bottom: 5px; /* Spacing between list items */
+  }
+  
+  .terms-content p,
+  .privacy-content p {
+    margin-bottom: 15px; /* Spacing below paragraphs */
+  }
