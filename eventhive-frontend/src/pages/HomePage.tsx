@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import TableRow from "../components/TableRow";
@@ -6,46 +6,57 @@ import Button from "../components/Button";
 import { Event } from "../types/event";
 import "../assets/styles/style.css";
 
-const HomePage: FC = () => {
+const HomePage: React.FC = () => {
     const navigate = useNavigate();
-
-    const [events, setEvents] = useState<Event[]>([]); // Initialize as empty array
+    const [events, setEvents] = useState<Event[]>([]);
 
     const initialEvents: Event[] = [
-        { id: 1, image: "/images/event1.png", name: "Python One Day Workshop", startDate: "15-03-2025", time: "09:00 am", type: "Offline" },
-        { id: 2, image: "/images/event2.png", name: "Introduction To GitHub", startDate: "04-03-2025", time: "07:00 pm", type: "Online" },
-        { id: 3, image: "/images/event3.png", name: "Introduction to Figma", startDate: "04-03-2025", time: "04:00 pm", type: "Offline" },
-        { id: 4, image: "/images/event4.png", name: "App Development Workshop", startDate: "25-02-2025", time: "09:00 am", type: "Offline" },
-        { id: 5, image: "/images/event5.png", name: "App Development Workshop", startDate: "25-02-2025", time: "09:00 am", type: "Offline" },
-        { id: 6, image: "/images/event6.png", name: "App Development Workshop", startDate: "25-02-2025", time: "09:00 am", type: "Offline" },
+        { id: 1, image: "/images/event1.png", name: "Python One Day Workshop", startDate: "2025-04-10", time: "09:00 am", type: "Offline" },
+        { id: 2, image: "/images/event2.png", name: "Introduction To GitHub", startDate: "2025-04-01", time: "07:00 pm", type: "Online" },
+        { id: 3, image: "/images/event3.png", name: "Introduction to Figma", startDate: "2025-03-29", time: "04:00 pm", type: "Offline" },
+        { id: 4, image: "/images/event4.png", name: "App Development Workshop", startDate: "2025-03-15", time: "09:00 am", type: "Offline" },
+        { id: 5, image: "/images/event5.png", name: "React Workshop", startDate: "2025-04-15", time: "02:00 pm", type: "Online" },
+        { id: 6, image: "/images/event6.png", name: "Django Workshop", startDate: "2025-03-10", time: "10:00 am", type: "Offline" },
     ];
 
     useEffect(() => {
-        // Retrieve new event from local storage, if available
         const storedEvent = localStorage.getItem('newEvent');
         const newEvent = storedEvent ? JSON.parse(storedEvent) : null;
-
-        // Combine initial events with the new event from local storage
-        const allEvents = [...initialEvents];
+    
+        const allEvents = [...initialEvents]; // ✅ Use 'const' instead of 'let'
+    
         if (newEvent) {
-            allEvents.unshift(newEvent); // Add new event to the beginning of the array
+            allEvents.unshift(newEvent);
         }
+    
+        allEvents.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+    
         setEvents(allEvents);
-    }, []);  // Empty dependency array ensures this runs only once on component mount
-
+    }, []);
+    
 
     const deleteEvent = (eventId: number) => {
         setEvents(events.filter((event) => event.id !== eventId));
     };
 
-    const upcomingEvents = events.slice(0, 3); // Keep the first 3 events as upcoming
-    const pastEvents = events.slice(3); // Keep the remaining events as past
+    const editEvent = (eventId: number) => {
+        const eventToEdit = events.find((event) => event.id === eventId);
+        if (eventToEdit) {
+            // Open a form or navigate to an edit page (You can implement the actual edit logic)
+            console.log("Editing event:", eventToEdit);
+            navigate(`/edit-event/${eventId}`);
+        }
+    };
+
+    const today = new Date().toISOString().split('T')[0];
+
+    const upcomingEvents = events.filter(event => event.startDate >= today);
+    const pastEvents = events.filter(event => event.startDate < today);
 
     return (
         <div className="main-content">
             <div className="header">
                 <h2 className="section-heading">Events</h2>
-
                 <Button color="primary" onClick={() => navigate("/create-event")}>
                     Create an event
                 </Button>
@@ -54,8 +65,8 @@ const HomePage: FC = () => {
             <div className="upcoming-section">
                 <h2 className="section-heading">Upcoming</h2>
                 <div className="event-container">
-                    {upcomingEvents.map((event) => ( // Map over upcomingEvents
-                        <EventCard key={event.id} event={event} deleteEvent={deleteEvent} />
+                    {upcomingEvents.map((event) => (
+                        <EventCard key={event.id} event={event} deleteEvent={deleteEvent} editEvent={editEvent} />
                     ))}
                 </div>
             </div>
