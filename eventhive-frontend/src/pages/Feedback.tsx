@@ -11,6 +11,7 @@ interface FeedbackItem {
 const Feedback: FC = () => {
     const [feedbackData, setFeedbackData] = useState<FeedbackItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const dummyData: FeedbackItem[] = useMemo(() => [
         { id: 1, date: '04-03-2025', eventName: 'Introduction to Figma', feedback: 'The session was informative, but a hands-on design challenge would have been helpful.', isRead: false },
@@ -43,12 +44,7 @@ const Feedback: FC = () => {
 
     const handleActionClick = (id: number) => {
         setFeedbackData(prevData =>
-            prevData.map(item => {
-                if (item.id === id) {
-                    return { ...item, isRead: !item.isRead };
-                }
-                return item;
-            })
+            prevData.map(item => item.id === id ? { ...item, isRead: !item.isRead } : item)
         );
     };
 
@@ -56,15 +52,20 @@ const Feedback: FC = () => {
         setFeedbackData(prevData => prevData.filter(item => item.id !== id));
     };
 
-    const getActionButton = (item: FeedbackItem) => {
-        return item.isRead
-            ? <button className="feedback-button delete-button" onClick={() => handleDelete(item.id)}>Delete</button>
-            : <button className="feedback-button mark-as-read-button" onClick={() => handleActionClick(item.id)}>Mark as Read</button>;
-    };
+    const filteredFeedback = feedbackData.filter(item =>
+        item.eventName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <div className="feedback-container">
             <h1 className="feedback-header">Feedback</h1>
+            <input
+                type="text"
+                placeholder="Search by event name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+            />
             {loading ? (
                 <p className="loading-indicator">Loading...</p>
             ) : (
@@ -78,12 +79,18 @@ const Feedback: FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {feedbackData.map(item => (
+                        {filteredFeedback.map(item => (
                             <tr key={item.id} style={{ fontWeight: !item.isRead ? 'bold' : 'normal' }}>
                                 <td>{item.date}</td>
                                 <td>{item.eventName}</td>
                                 <td>{item.feedback}</td>
-                                <td>{getActionButton(item)}</td>
+                                <td>
+                                    {item.isRead ? (
+                                        <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button>
+                                    ) : (
+                                        <button className="mark-as-read-button" onClick={() => handleActionClick(item.id)}>Mark as Read</button>
+                                    )}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
