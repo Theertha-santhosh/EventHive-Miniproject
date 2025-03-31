@@ -17,7 +17,7 @@ import CommunitySettingsPage from './pages/CommunitySettingsPage';
 import AnnouncementPage from './pages/AnnouncementPage'; // Import AnnouncementPage
 import CreateAnnouncementPage from './pages/CreateAnnouncementPage'; // Import the new component
 import { AnnouncementProvider } from './context/AnnouncementContext';
-//import Calendar from './pages/Calendar'; 
+import Calendar from './pages/Calendar'; 
 
 import "./assets/styles/style.css";
 
@@ -49,7 +49,7 @@ function App() {
 
 
                     <Route
-                        path="/settings"
+                        path="/setting"
                         element={
                             isLoggedIn ? (
                                 <Dashboard><SettingsPage /></Dashboard>
@@ -130,7 +130,7 @@ function App() {
                         }
                     />
 
-                    {/*<Route
+                    <Route
                         path="/calendar"
                         element={
                             isLoggedIn ? (
@@ -139,7 +139,7 @@ function App() {
                                 <Navigate to="/login" />
                             )
                         }
-                    />*/}
+                    />
 
                     {/* Redirect to login if not authenticated */}
                     <Route path="/" element={<Navigate to="/login" />} />
